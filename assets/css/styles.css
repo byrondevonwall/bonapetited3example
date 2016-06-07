@@ -1,0 +1,17 @@
+body{
+  font-size: .75em;
+  font-family: sans-serif;
+}
+
+path{
+  stroke: black;
+  stroke-width: none;
+  fill: none;
+}
+
+.axis path, .axis line{
+  fill: none;
+  stroke: black;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
