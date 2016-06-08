@@ -129,8 +129,11 @@ console.log(data)
 
   //append y axis label
   svg.append("text")
-    .attr("text-anchor", "middle")
-    .attr("transform", "translate("+(height/2)+","+")rotate(-90)")
+  .attr("transform", "rotate(-90)")
+      .attr("y", 0)
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
     .text("Temperatue (Celcius)")
 
   //max temperature range line
@@ -139,7 +142,8 @@ console.log(data)
     .attr("x2", width-20)
     .attr("y1", 80)
     .attr("y2", 80)
-    .style("stroke", "lightgray");
+    .style("stroke", "lightgray")
+    .attr("opacity", 0.1);
 
   //min temperature range line
   svg.append("svg:line")
@@ -148,7 +152,7 @@ console.log(data)
     .attr("y1", 200)
     .attr("y2", 200)
     .style("stroke", "rgb(189, 189, 189)")
-    .attr("opacity", 0.2);
+    .attr("opacity", 0.1);
 
   //min temp range area
   var minRectangle = svg.append("rect")
