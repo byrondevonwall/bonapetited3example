@@ -121,44 +121,67 @@ svg.append("svg:g")
   .attr("transform", "translate(" + (margins.left) + ",0)")
   .call(yAxis);
 
+  //max temperature range line
+  svg.append("svg:line")
+    .attr("x1", 50)
+    .attr("x2", width-20)
+    .attr("y1", 85)
+    .attr("y2", 85)
+    .style("stroke", "lightgray");
+
+  //min temperature range line
+  svg.append("svg:line")
+    .attr("x1", 50)
+    .attr("x2", width-20)
+    .attr("y1", 215)
+    .attr("y2", 215)
+    .style("stroke", "rgb(189, 189, 189)")
+    .attr("opacity", 0.2);
+
+  //min temp range area
+  var minRectangle = svg.append("rect")
+    .attr("x", 50)
+    .attr("y", 215)
+    .attr("width", 930)
+    .attr("height", 65)
+    .attr("fill", "lightblue")
+    .attr("opacity", 0.1);
+
+  //max temp range area
+  var maxRectangle = svg.append("rect")
+    .attr("x", 50)
+    .attr("y", 19)
+    .attr("width", 930)
+    .attr("height", 65)
+    .attr("fill", "pink")
+    .attr("opacity", 0.1);
+
+  // create variable for line
+  var line = d3.svg.line()
+     .x(function(d){ return x(dateFn(d))})
+     .y(function(d){ return y(tempFn(d))})
+     .interpolate("linear")
+
+  //append line
+  svg.append("svg:path")
+    .attr("d", line(data))
+    .style("stroke", "limegreen")
+
+  //append data as circles
+  svg.selectAll("circle").data(data).enter()
+    .append("svg:circle")
+    .attr("r", 4)
+    .attr("cx", function(d){ return x(dateFn(d))})
+    .attr("cy", function(d){ return y(tempFn(d))})
+    .style("stroke", "limegreen")
+    .style("fill", "white");
 
 
-// create variable for line
-var line = d3.svg.line()
-   .x(function(d){ return x(dateFn(d))})
-   .y(function(d){ return y(tempFn(d))})
-   .interpolate("linear")
 
-//append line
-svg.append("svg:path")
-  .attr("d", line(data))
-  .style("stroke", "dodgerblue")
 
-//append data as circles
-svg.selectAll("circle").data(data).enter()
-  .append("svg:circle")
-  .attr("r", 4)
-  .attr("cx", function(d){ return x(dateFn(d))})
-  .attr("cy", function(d){ return y(tempFn(d))})
-  .style("stroke", "dodgerblue")
-  .style("fill", "white");
 
-//max temperature range lin
 
-svg.append("svg:line")
-  .attr("x1", 50)
-  .attr("x2", width-20)
-  .attr("y1", 85)
-  .attr("y2", 85)
-  .style("stroke", "lightgray");
 
-//min temperature range line
-svg.append("svg:line")
-  .attr("x1", 50)
-  .attr("x2", width-20)
-  .attr("y1", 215)
-  .attr("y2", 215)
-  .style("stroke", "rgb(189, 189, 189)");
 
 // //grab the json data
 // var data = d3.json("http://bonapetite.herokuapp.com/api/mister/", function(error, json) {
