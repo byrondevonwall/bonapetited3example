@@ -145,6 +145,15 @@ console.log(data)
     .style("stroke", "lightgray")
     .attr("opacity", 0.1);
 
+  //max temp range area
+  var maxRectangle = svg.append("rect")
+    .attr("x", 50)
+    .attr("y", 19)
+    .attr("width", 930)
+    .attr("height", 60)
+    .attr("fill", "pink")
+    .attr("opacity", 0.1);
+
   //min temperature range line
   svg.append("svg:line")
     .attr("x1", 50)
@@ -161,15 +170,6 @@ console.log(data)
     .attr("width", 930)
     .attr("height", 60)
     .attr("fill", "lightblue")
-    .attr("opacity", 0.1);
-
-  //max temp range area
-  var maxRectangle = svg.append("rect")
-    .attr("x", 50)
-    .attr("y", 19)
-    .attr("width", 930)
-    .attr("height", 60)
-    .attr("fill", "pink")
     .attr("opacity", 0.1);
 
   // create variable for temp data line
@@ -190,7 +190,31 @@ console.log(data)
     .attr("cx", function(d){ return x(dateFn(d))})
     .attr("cy", function(d){ return y(tempFn(d))})
     .style("stroke", "limegreen")
-    .style("fill", "white");
+    .style("fill", "white")
+    .on("mouseover", function(d){//add tooltips to display temp/time data on hover over each data point
+        tempTooltip.transition()
+        .duration(200)
+        .style("opacity", 1)
+        .style("display", "block")
+        tempTooltip.html("<div id='temp-tooltip'><span>" + d.temperature + " Degrees Cecius</span><br><span>Taken at " + d.time_collected + "</span></div>")
+    })
+    .on("mouseout", function(d){
+      tempTooltip.transition()
+      .duration(200)
+      .style("opacity", 0)
+      .style("display", "none")
+    });
+
+
+  //create empty/invisible div to for as to have DOM attachment for tooltipe
+  var tempTooltip = d3.select("body")
+    .append("div")
+    .attr("class", "tempTooltip")
+    .style("opacity", 0)
+    .style("display", "none")
+    .style("position", "absolute")
+
+
 
 
 
@@ -207,60 +231,5 @@ console.log(data)
 //   var data = json.results;
 //   console.log(data)
 //
-//   //set variables for data ranges and axes
-//   var format = d3.time.format.iso
-//   var tempFn = function(d){ return d.temperature };
-//   var dateFn = function(d){ return format.parse(d.time_collected)}
 //
-//   console.log(data[1].temperature);
-//   //set variables for graph size and margins
-//   var width = 500;
-//   var height = 300;
-//   var margins = {
-//     top: 20,
-//     right: 20,
-//     bottom: 20,
-//     left: 50
-//   }
-//
-//   //set scale for x axis
-//   var x = d3.time.scale()
-//     .range([margins.left, width - margins.right])
-//     .domain(d3.extent(data, dateFn));
-//
-//   //set scale for y axis
-//   var y = d3.scale.linear()
-//     .range([height - margins.top, margins.bottom])
-//     .domain([d3.min(data, tempFn), d3.max(data, tempFn)]);
-//
-//   //create an svg graph!
-//   var svg = d3.select('#temp-graph').append("svg:svg")
-//     .attr("width", width + margins.left + margins.right)
-//     .attr("height", height + margins.top + margins.bottom)
-//
-//   //set x-axis scale
-//   xAxis = d3.svg.axis()
-//     .scale(x);
-//
-//   //set y-axis scale
-//   yAxis = d3.svg.axis()
-//     .scale(y)
-//     .orient("left");
-//
-//   //append x-axis
-//   svg.append("svg:g")
-//     .attr("transform", "translate(0," + (height - margins.bottom) + ")")
-//     .call(xAxis);
-//
-//   //append y-axis
-//   svg.append("svg:g")
-//     .attr("transform", "translate(" + (margins.left) + ",0)")
-//     .call(yAxis);
-//
-//   //append data
-//   svg.selectAll("circle").data(data).enter()
-//     .append("svg:circle")
-//     .attr("r", 4)
-//     .attr("cx", function(d){ return x(dateFn(d))})
-//     .attr("cy", function(d){ return y(tempFn(d))})
 // });
