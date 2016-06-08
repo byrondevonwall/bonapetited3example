@@ -145,17 +145,17 @@ console.log(data)
   svg.append("svg:line")
     .attr("x1", 50)
     .attr("x2", width-20)
-    .attr("y1", 215)
-    .attr("y2", 215)
+    .attr("y1", 200)
+    .attr("y2", 200)
     .style("stroke", "rgb(189, 189, 189)")
     .attr("opacity", 0.2);
 
   //min temp range area
   var minRectangle = svg.append("rect")
     .attr("x", 50)
-    .attr("y", 215)
+    .attr("y", 200)
     .attr("width", 930)
-    .attr("height", 35)
+    .attr("height", 60)
     .attr("fill", "lightblue")
     .attr("opacity", 0.1);
 
