@@ -66,67 +66,79 @@ var jsonDATA =
 var data = jsonDATA.slice();
 console.log(data)
 
-//set variables for data ranges and axes
-var format = d3.time.format.iso
-var  date_format = d3.time.format("%I:%M:%S")
-var tempFn = function(d){ return d.temperature };
-var dateFn = function(d){ return format.parse(d.time_collected)}
+  //set variables for data ranges and axes
+  var format = d3.time.format.iso
+  var  date_format = d3.time.format("%I:%M:%S")
+  var tempFn = function(d){ return d.temperature };
+  var dateFn = function(d){ return format.parse(d.time_collected)}
 
 
 
-console.log(data[1].time_collected);
-//set variables for graph size and margins
-var width = 1000;
-var height = 300;
-var margins = {
-  top: 20,
-  right: 20,
-  bottom: 20,
-  left: 50
-}
+  console.log(data[1].time_collected);
+  //set variables for graph size and margins
+  var width = 1000;
+  var height = 300;
+  var margins = {
+    top: 20,
+    right: 20,
+    bottom: 40,
+    left: 50
+  }
 
-//set scale for x axis
-var x = d3.time.scale()
-  .range([margins.left, width - margins.right])
-  .domain(d3.extent(data, dateFn))
+  //set scale for x axis
+  var x = d3.time.scale()
+    .range([margins.left, width - margins.right])
+    .domain(d3.extent(data, dateFn))
 
 
-//set scale for y axis
-var y = d3.scale.linear()
-  .range([height - margins.top, margins.bottom])
-  .domain([15, 35]);
+  //set scale for y axis
+  var y = d3.scale.linear()
+    .range([height - margins.top, margins.bottom])
+    .domain([15, 35]);
 
-//create an svg graph!
-var svg = d3.select('#temp-graph').append("svg:svg")
-  .attr("width", width + margins.left + margins.right)
-  .attr("height", height + margins.top + margins.bottom)
+  //create an svg graph!
+  var svg = d3.select('#temp-graph').append("svg:svg")
+    .attr("width", width + margins.left + margins.right)
+    .attr("height", height + margins.top + margins.bottom)
 
-//set x-axis scale
-xAxis = d3.svg.axis()
-  .scale(x)
-  .tickFormat(date_format);
+  //set x-axis scale
+  xAxis = d3.svg.axis()
+    .scale(x)
+    .tickFormat(date_format);
 
-//set y-axis scale
-yAxis = d3.svg.axis()
-  .scale(y)
-  .orient("left");
+  //set y-axis scale
+  yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
 
-//append x-axis
-svg.append("svg:g")
-  .attr("transform", "translate(0," + (height - margins.bottom) + ")")
-  .call(xAxis);
+  //append x-axis
+  svg.append("svg:g")
+    .attr("transform", "translate(0," + (height - margins.bottom) + ")")
+    .call(xAxis);
 
-//append y-axis
-svg.append("svg:g")
-  .attr("transform", "translate(" + (margins.left) + ",0)")
-  .call(yAxis);
+  //append y-axis
+  svg.append("svg:g")
+    .attr("transform", "translate(" + (margins.left) + ",-20)")
+    .call(yAxis);
+
+  //append x axis label
+  svg.append("text")
+    .attr("text-anchor", "middle")
+    .attr("transform", "translate("+(width/2)+","+(height)+")")
+    .text("Time (Seconds)")
+
+  //append y axis label
+  svg.append("text")
+    .attr("text-anchor", "middle")
+    .attr("transform", "translate("+(height/2)+","+")rotate(-90)")
+    .text("Temperatue (Celcius)")
 
   //max temperature range line
   svg.append("svg:line")
     .attr("x1", 50)
     .attr("x2", width-20)
-    .attr("y1", 85)
-    .attr("y2", 85)
+    .attr("y1", 80)
+    .attr("y2", 80)
     .style("stroke", "lightgray");
 
   //min temperature range line
@@ -143,7 +155,7 @@ svg.append("svg:g")
     .attr("x", 50)
     .attr("y", 215)
     .attr("width", 930)
-    .attr("height", 65)
+    .attr("height", 35)
     .attr("fill", "lightblue")
     .attr("opacity", 0.1);
 
@@ -152,22 +164,22 @@ svg.append("svg:g")
     .attr("x", 50)
     .attr("y", 19)
     .attr("width", 930)
-    .attr("height", 65)
+    .attr("height", 60)
     .attr("fill", "pink")
     .attr("opacity", 0.1);
 
-  // create variable for line
+  // create variable for temp data line
   var line = d3.svg.line()
      .x(function(d){ return x(dateFn(d))})
      .y(function(d){ return y(tempFn(d))})
      .interpolate("linear")
 
-  //append line
+  //append temp data line
   svg.append("svg:path")
     .attr("d", line(data))
     .style("stroke", "limegreen")
 
-  //append data as circles
+  //append temp data as circles
   svg.selectAll("circle").data(data).enter()
     .append("svg:circle")
     .attr("r", 4)
