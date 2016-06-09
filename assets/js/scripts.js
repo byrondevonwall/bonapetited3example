@@ -211,7 +211,7 @@ console.log(data);
         .style("display", "block")
         tempTooltip.html("<div id='temp-tooltip'><span>" + d.temperature + " Degrees Cecius</span><br><span>Taken " + d.time_collected + "</span></div>")
         .style("left", (d3.event.pageX) + "px")
-        .style("top", (d3.event.pageY + 28) + "px")
+        .style("top", (d3.event.pageY - 78) + "px")
     })
     .on("mouseout", function(d){
       tempTooltip.transition()
