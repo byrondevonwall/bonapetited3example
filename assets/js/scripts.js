@@ -210,6 +210,8 @@ console.log(data);
         .style("opacity", 1)
         .style("display", "block")
         tempTooltip.html("<div id='temp-tooltip'><span>" + d.temperature + " Degrees Cecius</span><br><span>Taken " + d.time_collected + "</span></div>")
+        .style("left", (d3.event.pageX) + "px")
+        .style("top", (d3.event.pageY + 28) + "px")
     })
     .on("mouseout", function(d){
       tempTooltip.transition()
@@ -319,7 +321,9 @@ console.log(data);
        .duration(200)
        .style("opacity", 1)
        .style("display", "block")
-       tempTooltip.html("<div id='temp-tooltip'><span>" + d.pH_level + " </span><br><span>Taken " + d.time_collected + "</span></div>")
+       tempTooltip.html("<div id='temp-tooltip'><span>" + d.pH_level + " µS/cm </span><br><span>Taken " + d.time_collected + "</span></div>")
+       .style("left", (d3.event.pageX) + "px")
+       .style("top", (d3.event.pageY - 78) + "px")
    })
    .on("mouseout", function(d){
      tempTooltip.transition()

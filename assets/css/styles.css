@@ -15,7 +15,17 @@ path{
   stroke-width: 1;
   shape-rendering: crispEdges;
 }
-/*
-#temp-graph{
-  margin: 100 0;
-}*/
+
+.tempTooltip{
+  background-color: #eee;
+  box-shadow: 0 0 5px #999999;
+  color: #333;
+  left: 130px;
+  padding: 10px;
+  position: absolute;
+  top: 95px;
+  width: 120px;
+  z-index: 10;
+  border-radius: .5em;
+  opacity: 0.5;
+}
