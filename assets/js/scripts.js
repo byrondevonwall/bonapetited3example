@@ -223,7 +223,8 @@ console.log(data);
     .append("div")
     .attr("class", "tempTooltip")
     .style("opacity", 0)
-    .style("display", "none");
+    .style("display", "none")
+    .attr("z-index", 1000);
 
 
 
@@ -258,7 +259,74 @@ console.log(data);
     .style("text-anchor", "middle")
     .text("Electrical Conductivilty (µS/cm)");
 
+  //max ec range line
+  ecg.append("svg:line")
+    .attr("x1", 50)
+    .attr("x2", width-20)
+    .attr("y1", 88)
+    .attr("y2", 88)
+    .style("stroke", "lightgray")
+    .attr("opacity", 0.1);
 
+  //max ec range area
+  var maxRectangle = ecg.append("rect")
+    .attr("x", 50)
+    .attr("y", 19)
+    .attr("width", width-70)
+    .attr("height", 70)
+    .attr("fill", "lightgray")
+    .attr("opacity", 0.2);
+
+  //min ec range line
+  ecg.append("svg:line")
+    .attr("x1", 50)
+    .attr("x2", width-20)
+    .attr("y1", 312)
+    .attr("y2", 312)
+    .style("stroke", "rgb(189, 189, 189)")
+    .attr("opacity", 0.1);
+
+  //min temp range area
+  var minRectangle = ecg.append("rect")
+    .attr("x", 50)
+    .attr("y", 312)
+    .attr("width", width-70)
+    .attr("height", 48)
+    .attr("fill", "lightgray")
+    .attr("opacity", 0.2);
+
+  // create variable for ec data line
+  var ecLine = d3.svg.line()
+   .x(function(d){ return x(dateFn(d))})
+   .y(function(d){ return ecY(ecFn(d))})
+   .interpolate("linear");
+
+  //append temp data line
+  ecg.append("svg:path")
+   .attr("d", ecLine(data))
+   .style("stroke", "limegreen");
+
+ //append ec data as circles
+ ecg.selectAll("circle").data(data).enter()
+   .append("svg:circle")
+   .attr("r", 4)
+   .attr("cx", function(d){ return x(dateFn(d))})
+   .attr("cy", function(d){ return ecY(ecFn(d))})
+   .style("stroke", "limegreen")
+   .style("fill", "white")
+   .on("mouseover", function(d){//add tooltips to display temp/time data on hover over each data point
+       tempTooltip.transition()
+       .duration(200)
+       .style("opacity", 1)
+       .style("display", "block")
+       tempTooltip.html("<div id='temp-tooltip'><span>" + d.pH_level + " </span><br><span>Taken " + d.time_collected + "</span></div>")
+   })
+   .on("mouseout", function(d){
+     tempTooltip.transition()
+     .duration(200)
+     .style("opacity", 0)
+     .style("display", "none")
+   });
 
 
 
