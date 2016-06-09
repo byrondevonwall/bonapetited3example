@@ -82,7 +82,7 @@ console.log(data);
   var margins = {
     top: 20,
     right: 20,
-    bottom: 40,
+    bottom: 55,
     left: 50
   };
 
@@ -126,18 +126,18 @@ console.log(data);
 
   //append x-axis
   svg.append("svg:g")
-    .attr("transform", "translate(0," + (height - margins.bottom) + ")")
+    .attr("transform", "translate(0," + (height - margins.bottom/2.75) + ")")
     .call(xAxis);
 
   //append y-axis
   svg.append("svg:g")
-    .attr("transform", "translate(" + (margins.left) + ",-20)")
+    .attr("transform", "translate(" + (margins.left) + ")")
     .call(yAxis);
 
   //append x axis label
   svg.append("text")
     .attr("text-anchor", "middle")
-    .attr("transform", "translate("+(width/2)+","+(height)+")")
+    .attr("transform", "translate("+(width/2)+","+(height+margins.bottom/3)+")")
     .text("Time (Seconds)");
 
   //append y axis label
@@ -153,17 +153,17 @@ console.log(data);
   svg.append("svg:line")
     .attr("x1", 50)
     .attr("x2", width-20)
-    .attr("y1", 105)
-    .attr("y2", 105)
+    .attr("y1", 135)
+    .attr("y2", 135)
     .style("stroke", "lightgray")
     .attr("opacity", 0.1);
 
   //max temp range area
   var maxRectangle = svg.append("rect")
     .attr("x", 50)
-    .attr("y", 19)
+    .attr("y", 55)
     .attr("width", width-70)
-    .attr("height", 85)
+    .attr("height", 80)
     .attr("fill", "pink")
     .attr("opacity", 0.2);
 
@@ -171,17 +171,17 @@ console.log(data);
   svg.append("svg:line")
     .attr("x1", 50)
     .attr("x2", width-20)
-    .attr("y1", 272)
-    .attr("y2", 272)
+    .attr("y1", 300)
+    .attr("y2", 300)
     .style("stroke", "rgb(189, 189, 189)")
     .attr("opacity", 0.1);
 
   //min temp range area
   var minRectangle = svg.append("rect")
     .attr("x", 50)
-    .attr("y", 272)
+    .attr("y", 300)
     .attr("width", width-70)
-    .attr("height", 86)
+    .attr("height", 80)
     .attr("fill", "lightblue")
     .attr("opacity", 0.2);
 
@@ -236,18 +236,18 @@ console.log(data);
 
   //append x-axis
   ecg.append("svg:g")
-    .attr("transform", "translate(0," + (height - margins.bottom) + ")")
+    .attr("transform", "translate(0," + (height-margins.bottom/2.75) + ")")
     .call(xAxis);
 
   //append x axis label
   ecg.append("text")
     .attr("text-anchor", "middle")
-    .attr("transform", "translate("+(width/2)+","+(height)+")")
+    .attr("transform", "translate("+(width/2)+","+(height+margins.bottom/3)+")")
     .text("Time (Seconds)");
 
   //append y-axis
   ecg.append("svg:g")
-    .attr("transform", "translate(" + (margins.left) + ",-20)")
+    .attr("transform", "translate(" + (margins.left) + ")")
     .call(ecYAxis);
 
   //append y axis label
@@ -263,17 +263,17 @@ console.log(data);
   ecg.append("svg:line")
     .attr("x1", 50)
     .attr("x2", width-20)
-    .attr("y1", 88)
-    .attr("y2", 88)
+    .attr("y1", 118)
+    .attr("y2", 118)
     .style("stroke", "lightgray")
-    .attr("opacity", 0.1);
+    .attr("opacity", 0.3);
 
   //max ec range area
   var maxRectangle = ecg.append("rect")
     .attr("x", 50)
-    .attr("y", 19)
+    .attr("y", 55)
     .attr("width", width-70)
-    .attr("height", 70)
+    .attr("height", 63)
     .attr("fill", "lightgray")
     .attr("opacity", 0.2);
 
@@ -281,17 +281,17 @@ console.log(data);
   ecg.append("svg:line")
     .attr("x1", 50)
     .attr("x2", width-20)
-    .attr("y1", 312)
-    .attr("y2", 312)
+    .attr("y1", 338)
+    .attr("y2", 338)
     .style("stroke", "rgb(189, 189, 189)")
-    .attr("opacity", 0.1);
+    .attr("opacity", 0.3);
 
   //min temp range area
   var minRectangle = ecg.append("rect")
     .attr("x", 50)
-    .attr("y", 312)
+    .attr("y", 338)
     .attr("width", width-70)
-    .attr("height", 48)
+    .attr("height", 43)
     .attr("fill", "lightgray")
     .attr("opacity", 0.2);
 
