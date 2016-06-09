@@ -165,7 +165,7 @@ console.log(data);
     .attr("width", width-70)
     .attr("height", 80)
     .attr("fill", "pink")
-    .attr("opacity", 0.2);
+    .attr("opacity", 0.5);
 
   //min temperature range line
   svg.append("svg:line")
@@ -183,7 +183,7 @@ console.log(data);
     .attr("width", width-70)
     .attr("height", 80)
     .attr("fill", "lightblue")
-    .attr("opacity", 0.2);
+    .attr("opacity", 0.5);
 
   // create variable for temp data line
   var line = d3.svg.line()
@@ -275,7 +275,7 @@ console.log(data);
     .attr("width", width-70)
     .attr("height", 63)
     .attr("fill", "lightgray")
-    .attr("opacity", 0.2);
+    .attr("opacity", 0.5);
 
   //min ec range line
   ecg.append("svg:line")
@@ -293,7 +293,7 @@ console.log(data);
     .attr("width", width-70)
     .attr("height", 43)
     .attr("fill", "lightgray")
-    .attr("opacity", 0.2);
+    .attr("opacity", 0.5);
 
   // create variable for ec data line
   var ecLine = d3.svg.line()
